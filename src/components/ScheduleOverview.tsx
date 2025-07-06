@@ -100,9 +100,12 @@ export const ScheduleOverview = () => {
 
   const formatScheduledTime = (utcTime: string) => {
     return formatISTTime(utcTime, { 
-      dateStyle: 'short', 
-      timeStyle: 'short',
-      hour12: false 
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
     });
   };
 
