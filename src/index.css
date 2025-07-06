@@ -1,0 +1,170 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 0% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 100%;
+    --ring: 210 100% 50%;
+
+    --radius: 12px;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 210 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 210 100% 50%;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 0% 62%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 210 100% 50%;
+
+    --sidebar-background: 0 0% 2%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 210 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 210 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .enhanced-card {
+    @apply bg-white dark:bg-black border border-gray-200 dark:border-gray-800 shadow-sm rounded-xl transition-all duration-200 hover:shadow-md;
+  }
+  
+  .glass-effect {
+    @apply bg-white/95 dark:bg-black/95 backdrop-blur-sm border border-gray-200 dark:border-gray-800;
+  }
+  
+  .btn-enhanced {
+    @apply transition-all duration-150 transform active:scale-[0.98] shadow-sm hover:shadow-md;
+  }
+  
+  .status-indicator {
+    @apply relative inline-flex items-center justify-center;
+  }
+  
+  .status-indicator::before {
+    @apply absolute -inset-1 bg-current rounded-full opacity-20 animate-pulse;
+    content: '';
+  }
+  
+  .loading-skeleton {
+    @apply animate-pulse bg-gradient-to-r from-white dark:from-black via-gray-100 dark:via-gray-900 to-white dark:to-black bg-[length:200%_100%];
+    animation: loading-shimmer 1.5s infinite;
+  }
+  
+  .interactive {
+    @apply transition-all duration-150 ease-out;
+  }
+  
+  .focus-enhanced:focus {
+    @apply ring-2 ring-primary/30 ring-offset-2 ring-offset-background outline-none;
+  }
+}
+
+@layer utilities {
+  .space-y-enhanced > * + * {
+    margin-top: 1.5rem;
+  }
+  
+  .text-display {
+    @apply text-4xl font-semibold tracking-tight text-foreground;
+    font-weight: 600;
+  }
+  
+  .text-heading {
+    @apply text-2xl font-semibold tracking-tight text-foreground;
+    font-weight: 600;
+  }
+  
+  .text-subheading {
+    @apply text-lg font-medium tracking-tight text-foreground;
+    font-weight: 500;
+  }
+  
+  .text-body {
+    @apply text-sm leading-relaxed text-foreground;
+    font-weight: 400;
+  }
+  
+  .text-caption {
+    @apply text-xs text-gray-600 dark:text-gray-400;
+    font-weight: 400;
+  }
+}
+
+@keyframes loading-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
