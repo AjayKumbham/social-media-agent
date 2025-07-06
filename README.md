@@ -38,10 +38,11 @@
 - **Content Optimization**: Automatic content length and style optimization for each platform
 
 ### 🌐 Platform Integrations
+- **Hashnode**: Blog publishing
+- **Dev.to**: Developer blog publishing
 - **Twitter/X**: API integration with media upload support
 - **LinkedIn**: Content publishing
 - **Instagram**: Image and story publishing
-- **TikTok**: Short-form video content automation
 - **YouTube**: Video upload and scheduling for YouTube Shorts
 - **Reddit**: Community-specific content posting
 
