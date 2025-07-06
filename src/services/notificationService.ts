@@ -47,7 +47,7 @@ export class NotificationService {
         .from('notification_preferences')
         .select('preferences')
         .eq('user_id', user.user.id)
-        .single();
+        .maybeSingle();
 
       // Type guard and casting from Json to NotificationPreferences
       if (data?.preferences && typeof data.preferences === 'object' && !Array.isArray(data.preferences)) {
