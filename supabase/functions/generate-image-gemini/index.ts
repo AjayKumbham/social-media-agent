@@ -1,6 +1,6 @@
 import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -35,28 +35,22 @@ serve(async (req) => {
     const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Get API keys from user's platform settings
-    const { data: platformData, error: platformError } = await supabase
-      .from('platforms')
+    // Get Gemini API key from media_api_credentials
+    const { data: geminiRow, error: geminiError } = await supabase
+      .from('media_api_credentials')
       .select('credentials')
       .eq('user_id', userId)
-      .eq('platform_name', 'llm_apis')
-      .single();
+      .eq('api_name', 'gemini')
+      .maybeSingle();
 
-    if (platformError && platformError.code !== 'PGRST116') {
-      console.error('Database error fetching LLM API keys:', platformError);
-      throw new Error('Failed to fetch API configuration from database');
+    if (geminiError) {
+      console.error('Database error fetching Gemini API key:', geminiError);
+      throw new Error('Failed to fetch Gemini API key from database');
     }
 
-    if (!platformData?.credentials) {
-      console.error('No LLM API keys found for user:', userId);
-      throw new Error('LLM API keys not configured. Please set up your AI API keys in the platform settings.');
-    }
-
-    const credentials = platformData.credentials as any;
-    
-    if (!credentials.gemini_key) {
-      throw new Error('Gemini API key not configured in platform settings');
+    const geminiApiKey = geminiRow?.credentials?.api_key;
+    if (!geminiApiKey) {
+      throw new Error('Gemini API key not configured. Please set up your Gemini API key in the platform settings.');
     }
 
     const config = PLATFORM_CONFIGS[platform] || PLATFORM_CONFIGS.devto;
@@ -78,7 +72,7 @@ Make it visually striking, professional, and platform-appropriate.`;
 
     // Try to use Gemini 2.0 Flash for actual image generation
     try {
-      const imageResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${credentials.gemini_key}`, {
+      const imageResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${geminiApiKey}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

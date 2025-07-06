@@ -655,17 +655,11 @@ export class EnhancedScheduler {
     return 'social';
   }
 
-  private getPostType(platform: string): string {
-    const postTypes: { [key: string]: string } = {
-      'hashnode': 'article',
-      'devto': 'article', 
-      'twitter': 'tweet',
-      'linkedin': 'post',
-      'instagram': 'post',
-      'youtube': 'short',
-      'reddit': 'post'
-    };
-    return postTypes[platform] || 'post';
+  private getPostType(platform: string): 'blog' | 'social' | 'video' | 'thread' {
+    if (["hashnode", "devto"].includes(platform)) return "blog";
+    if (["instagram", "youtube"].includes(platform)) return "video";
+    if (platform === "twitter") return "thread";
+    return "social";
   }
 
   // Get comprehensive scheduler status
