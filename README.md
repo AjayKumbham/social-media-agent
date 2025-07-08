@@ -1,5 +1,9 @@
 # 🚀 Social Media Automation Platform
 
+> **Note:** This project is currently under active development. Features, functionality, and documentation are subject to change as the platform evolves toward a stable release.
+> 
+> **Contributions are welcome!** If you'd like to help improve the platform, please feel free to open issues or submit pull requests.
+
 *AI-Powered Content Generation & Multi-Platform Publishing*
   
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -10,7 +14,6 @@
   [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
   ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
   ![Version](https://img.shields.io/badge/version-1.0.0-blue)
-  ![Uptime](https://img.shields.io/badge/uptime-99.9%25-brightgreen)
 
 ---
 
